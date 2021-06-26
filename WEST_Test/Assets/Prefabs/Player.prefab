@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3609486915732950467}
   - component: {fileID: 6830199156541602597}
   - component: {fileID: 9058103524547595174}
-  - component: {fileID: 8632298697389369373}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -124,7 +123,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0034421682, y: -0.4707554}
+  m_Offset: {x: -0.0034422874, y: -0.2957508}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -135,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7401829, y: 0.31499064}
+  m_Size: {x: 0.8972645, y: 0.66499984}
   m_EdgeRadius: 0
 --- !u!114 &3609486915732950465
 MonoBehaviour:
@@ -150,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4.5
-  startingPosition: {fileID: 0}
+  startingPosition: {fileID: 11400000, guid: 789a58343fe1ba54e86aa91bc42e8508, type: 2}
 --- !u!95 &3609486915732950467
 Animator:
   serializedVersion: 3
@@ -183,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contextClue: {fileID: 6249112631883629785}
+  contextActive: 0
 --- !u!114 &9058103524547595174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,35 +201,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6830199156541602597}
         m_TargetAssemblyTypeName: ContextClue, Assembly-CSharp
-        m_MethodName: Enable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8632298697389369373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3609486915732950469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a28dc22bf12a6a47b0b4aaf166c1466, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 3232516d6f59ecc4a99beb583f8004f3, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6830199156541602597}
-        m_TargetAssemblyTypeName: ContextClue, Assembly-CSharp
-        m_MethodName: Disable
+        m_MethodName: ChangeContext
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

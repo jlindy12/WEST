@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Purple Flowers
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 7657769870422337245, guid: 53b9d339f6bfa744b881cd39284d51de, type: 3}
-  - {fileID: 4330629437022012163, guid: 53b9d339f6bfa744b881cd39284d51de, type: 3}
-  - {fileID: 7657769870422337245, guid: 53b9d339f6bfa744b881cd39284d51de, type: 3}
-  - {fileID: 3004233274968527385, guid: 53b9d339f6bfa744b881cd39284d51de, type: 3}
+  - {fileID: -5602591012277629656, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
+  - {fileID: 7729712922910519275, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
+  - {fileID: -5602591012277629656, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
+  - {fileID: -7646084721453183121, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0

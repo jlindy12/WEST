@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
   m_Name: Pink Flowers
   m_EditorClassIdentifier: 
-  m_AnimatedSprites: []
+  m_AnimatedSprites:
+  - {fileID: 2614881530113388236, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
+  - {fileID: 3904490153842838278, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
+  - {fileID: 2614881530113388236, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
+  - {fileID: -6319316747635162746, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Yellow Flowers
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -2421084255685320916, guid: 53b9d339f6bfa744b881cd39284d51de, type: 3}
-  - {fileID: -4841783289820903888, guid: 53b9d339f6bfa744b881cd39284d51de, type: 3}
-  - {fileID: -2421084255685320916, guid: 53b9d339f6bfa744b881cd39284d51de, type: 3}
-  - {fileID: 2500808271581784876, guid: 53b9d339f6bfa744b881cd39284d51de, type: 3}
+  - {fileID: -3717756306024346785, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
+  - {fileID: -3194995271390987407, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
+  - {fileID: -3717756306024346785, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
+  - {fileID: 6698124509249534932, guid: 2105a1ef27539544795b49fc086235ab, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0

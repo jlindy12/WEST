@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5677ae327331924f94d61fe4e7d9609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newTrack: {fileID: 8300000, guid: 581287399ea064c42b069c6aa823d47e, type: 3}
+  newTrack: {fileID: 8300000, guid: d37de120e84d297479ee28a56e69ab82, type: 3}
 --- !u!4 &450844517
 Transform:
   m_ObjectHideFlags: 0
@@ -1261,7 +1261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160ef5084c99388408951641e046c062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newTrack: {fileID: 8300000, guid: 71b6e276af75eff4a87786629c038430, type: 3}
+  newTrack: {fileID: 8300000, guid: e8f95bba4cebd7a49868793ee8b0c036, type: 3}
 --- !u!1001 &928105909
 PrefabInstance:
   m_ObjectHideFlags: 0
