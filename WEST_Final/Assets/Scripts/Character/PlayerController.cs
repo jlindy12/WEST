@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 input;
 	private Character character;
 	public event Action OnEncountered;
+	public event Action<Collider2D> OnEnterTrainersView;
     private bool isTurning;
     private float stopMovingTime;
     private float time;
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
                         character.moveSpeed = 8f;
                     }
                     else character.moveSpeed = 5f;
-                    StartCoroutine(character.Move(input, CheckForEncounters)); 
+                    StartCoroutine(character.Move(input, OnMoveOver)); 
                 }
             }
         }
@@ -76,6 +77,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+	private void OnMoveOver()
+	{
+		CheckForEncounters();
+		CheckIfInTrainersView();
+	}
+
     private void CheckForEncounters()
     {
         if (Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.GrassLayer) != null)
@@ -87,4 +94,15 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+	private void CheckIfInTrainersView()
+	{
+		var collider = Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.FovLayer);
+		if (collider != null)
+		{
+			character.Animator.IsMoving = false;
+			OnEnterTrainersView?.Invoke(collider);
+		}
+	}
 }
+

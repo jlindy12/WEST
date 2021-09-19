@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { FreeRoam, Battle, Dialog }
+public enum GameState { FreeRoam, Battle, Dialog, Cutscene }
 
 public class GameController : MonoBehaviour
 {
@@ -12,12 +12,27 @@ public class GameController : MonoBehaviour
 
 	GameState state;
 
+	private void Awake()
+	{
+		ConditionsDB.Init();
+	}
+
 	private void Start()
 	{
 		playerController.OnEncountered += StartBattle;
 		battleSystem.OnBattleOver += EndBattle;
 
-		DialogManager.Instance.OnShowDialog += () =>
+		playerController.OnEnterTrainersView += (Collider2D outlawCollider) =>
+		{
+			var outlaw = outlawCollider.GetComponentInParent<OutlawController>();
+			if (outlaw != null)
+			{
+				state = GameState.Cutscene;
+				StartCoroutine(outlaw.TriggerOutlawBattle(playerController));
+			}
+		};
+
+			DialogManager.Instance.OnShowDialog += () =>
 		{
 			state = GameState.Dialog;
 		};
@@ -35,7 +50,10 @@ public class GameController : MonoBehaviour
 		battleSystem.gameObject.SetActive(true);
 		worldCamera.gameObject.SetActive(false);
 
-		battleSystem.StartBattle();
+		var playerParty = playerController.GetComponent<AnimalParty>();
+		var wildAnimal = FindObjectOfType<MapArea>().GetComponent<MapArea>().GetRandomWildAnimal();		
+
+		battleSystem.StartBattle(playerParty, wildAnimal);
 	}
 
 	void EndBattle(bool won)
