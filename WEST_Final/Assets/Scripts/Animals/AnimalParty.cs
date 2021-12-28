@@ -24,4 +24,16 @@ public class AnimalParty : MonoBehaviour
    {
       return animals.Where(x => x.HP > 0).FirstOrDefault();
    }
+
+   public void AddAnimal(Animal newAnimal)
+   {
+      if (animals.Count < 6)
+      {
+         animals.Add(newAnimal);
+      }
+      else
+      {
+         // TODO: Add to the PC
+      }
+   }
 }

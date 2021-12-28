@@ -11,9 +11,12 @@ public class GameController : MonoBehaviour
 	[SerializeField] Camera worldCamera;
 
 	GameState state;
+	
+	public static GameController Instance { get; private set; }
 
 	private void Awake()
 	{
+		Instance = this;
 		ConditionsDB.Init();
 	}
 
@@ -51,13 +54,36 @@ public class GameController : MonoBehaviour
 		worldCamera.gameObject.SetActive(false);
 
 		var playerParty = playerController.GetComponent<AnimalParty>();
-		var wildAnimal = FindObjectOfType<MapArea>().GetComponent<MapArea>().GetRandomWildAnimal();		
+		var wildAnimal = FindObjectOfType<MapArea>().GetComponent<MapArea>().GetRandomWildAnimal();
 
-		battleSystem.StartBattle(playerParty, wildAnimal);
+		var wildAnimalCopy = new Animal(wildAnimal.Base, wildAnimal.Level);
+		
+		battleSystem.StartBattle(playerParty, wildAnimalCopy);
+	}
+
+	private OutlawController outlaw;
+	
+	public void StartOutlawBattle(OutlawController outlaw)
+	{
+		state = GameState.Battle;
+		battleSystem.gameObject.SetActive(true);
+		worldCamera.gameObject.SetActive(false);
+
+		this.outlaw = outlaw;
+		var playerParty = playerController.GetComponent<AnimalParty>();		
+		var outlawParty = outlaw.GetComponent<AnimalParty>();	
+		
+		battleSystem.StartOutlawBattle(playerParty, outlawParty);
 	}
 
 	void EndBattle(bool won)
 	{
+		if (outlaw != null && won == true)
+		{
+			outlaw.BattleLost();
+			outlaw = null;
+		}
+		
 		state = GameState.FreeRoam;
 		battleSystem.gameObject.SetActive(false);
 		worldCamera.gameObject.SetActive(true);

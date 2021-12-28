@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 
@@ -8,6 +9,14 @@ public class Animal
 {
 	[SerializeField] AnimalBase _base;
 	[SerializeField] int level;
+
+	public Animal(AnimalBase pBase, int pLevel)
+	{
+		_base = pBase;
+		level = pLevel;
+
+		Init();
+	}
    	public AnimalBase Base
     {
 	    get { return _base; }
@@ -19,7 +28,10 @@ public class Animal
 
 	public int HP { get; set; }
 
+	public int Exp {get; set; }
+
 	public List<Move> Moves { get; set; }
+	public Move CurrentMove { get; set; }
 	//Store values of base stats so we can use stat-boosting moves in battle.
 	public Dictionary<Stat, int> Stats { get; private set; }
 
@@ -32,7 +44,7 @@ public class Animal
 	public Condition VolatileStatus { get; private set; }
 	public int VolatileStatusTime { get; set; }
 
-	public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
+	public Queue<string> StatusChanges { get; private set; }
 	public bool HpChanged { get; set; }
 	public event System.Action OnStatusChanged;
 
@@ -46,13 +58,16 @@ public class Animal
 				Moves.Add(new Move(move.Base));
 
 			//Check if More than Four Moves
-			if (Moves.Count >= 4)
+			if (Moves.Count >= AnimalBase.MaxNumOfMoves)
 				break;
 		}
+
+		Exp = Base.GetExpForLevel(Level);
 		
 		CalculateStats();
 		HP = MaxHP;
 
+		StatusChanges = new Queue<string>();
 		ResetStatBoost();
 		Status = null;
 		VolatileStatus = null;
@@ -116,6 +131,30 @@ public class Animal
 			else
 				StatusChanges.Enqueue($"{Base.Name}'s {stat} decreased!");
 		}
+	}
+
+	public bool CheckForLevelUp()
+	{
+		if (Exp > Base.GetExpForLevel(level + 1))
+		{
+			++level;
+			return true;
+		}
+		
+		return false;
+	}
+
+	public LearnableMove GetLearnableMoveAtCurrLevel()
+	{
+		return Base.LearnableMoves.Where(x => x.Level == level).FirstOrDefault();	
+	}
+
+	public void LearnMove(LearnableMove moveToLearn)
+	{
+		if (Moves.Count > AnimalBase.MaxNumOfMoves)
+			return;
+
+		Moves.Add(new Move(moveToLearn.Base));
 	}
 
 	public int Attack
@@ -215,8 +254,10 @@ public class Animal
 	//Select Random Move when Enemy Attacks
 	public Move GetRandomMove()
 	{
-		int r = Random.Range(0, Moves.Count);
-		return Moves[r];
+		var movesWithPP = Moves.Where(x => x.PP > 0).ToList();
+		
+		int r = Random.Range(0, movesWithPP.Count);
+		return movesWithPP[r];
 	}
 
 	public bool OnBeforeMove()

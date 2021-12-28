@@ -12,7 +12,7 @@ public class PartyScreen : MonoBehaviour
     //Function Preventing the need for Manual Changes to Party Members/Composition in the Inspector
     public void Init()
     {
-        memberSlots = GetComponentsInChildren<PartyMemberUI>();
+        memberSlots = GetComponentsInChildren<PartyMemberUI>(true);
     }
 
     //Will only show the number of slots equal to the number of members in the party. Disables others.
@@ -22,8 +22,11 @@ public class PartyScreen : MonoBehaviour
         
         for (int i = 0; i < memberSlots.Length; i++)
         {
-            if (i < animals.Count)
-                memberSlots[i].SetData(animals[i]);
+            if (i < animals.Count) 
+			{ 
+                memberSlots[i].gameObject.SetActive(true);
+				memberSlots[i].SetData(animals[i]);
+			}
             else
                 memberSlots[i].gameObject.SetActive(false);
         }

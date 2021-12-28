@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] string name;
+    [SerializeField] Sprite sprite;
+
+    private const float offsetY = 0.3f;
     private Vector2 input;
 	private Character character;
 	public event Action OnEncountered;
@@ -85,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForEncounters()
     {
-        if (Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.GrassLayer) != null)
+        if (Physics2D.OverlapCircle(transform.position - new Vector3(0, offsetY), 0.2f, GameLayers.i.GrassLayer) != null)
         {
             if (UnityEngine.Random.Range(1, 101) <= 10)
             {
@@ -97,12 +101,22 @@ public class PlayerController : MonoBehaviour
 
 	private void CheckIfInTrainersView()
 	{
-		var collider = Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.FovLayer);
+		var collider = Physics2D.OverlapCircle(transform.position - new Vector3(0, offsetY), 0.2f, GameLayers.i.FovLayer);
 		if (collider != null)
 		{
 			character.Animator.IsMoving = false;
 			OnEnterTrainersView?.Invoke(collider);
 		}
 	}
+    
+    public string Name
+    {
+        get => name;
+    }
+
+    public Sprite Sprite
+    {
+        get => sprite;
+    }
 }
 
